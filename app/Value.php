@@ -11,7 +11,7 @@ class Value extends Model {
 
 	public function device()
 	{
-		return $this->belongsTo('Device', 'id','did');
+		return $this->belongsTo('App\Device', 'id','did');
 	}
 
 }

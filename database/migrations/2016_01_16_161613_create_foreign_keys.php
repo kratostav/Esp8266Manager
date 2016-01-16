@@ -20,5 +20,6 @@ class CreateForeignKeys extends Migration {
 		Schema::table('values', function(Blueprint $table) {
 			$table->dropForeign('values_did_foreign');
 		});
+
 	}
 }

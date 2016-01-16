@@ -1,6 +1,18 @@
 <?php namespace App\Http\Controllers;
 
+use App\Device;
+
 class DeviceController extends Controller {
+
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
 
   /**
    * Display a listing of the resource.
@@ -9,7 +21,9 @@ class DeviceController extends Controller {
    */
   public function index()
   {
-    
+    //$devices = Device::with('values')->get();
+    $devices = auth()->user()->devices()->with('values')->get(); //get All Devices with Values from Loggedin User
+    return response()->json($devices,200);
   }
 
   /**
@@ -19,7 +33,7 @@ class DeviceController extends Controller {
    */
   public function create()
   {
-    
+    //TODO: FORM!
   }
 
   /**
@@ -29,7 +43,7 @@ class DeviceController extends Controller {
    */
   public function store()
   {
-    
+    //TODO: Store transaction
   }
 
   /**
@@ -40,7 +54,12 @@ class DeviceController extends Controller {
    */
   public function show($id)
   {
-    
+    $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
+    if($device)
+    {
+      return response()->json($device,200);
+    }
+    return response()->json("not found",404);
   }
 
   /**
@@ -51,6 +70,12 @@ class DeviceController extends Controller {
    */
   public function edit($id)
   {
+    $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
+    if($device)
+    {
+      return response()->json($device,200); //TODO: return form!
+    }
+    return response()->json("not found",404);
     
   }
 
@@ -62,7 +87,12 @@ class DeviceController extends Controller {
    */
   public function update($id)
   {
-    
+    $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
+    if($device)
+    {
+      return response()->json($device,200); //TODO: do sth with device!
+    }
+    return response()->json("not found",404);
   }
 
   /**
@@ -73,7 +103,13 @@ class DeviceController extends Controller {
    */
   public function destroy($id)
   {
-    
+    $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
+    if($device)
+    {
+      $device->delete(); //TODO: Transaction
+      return response()->json($device,200);
+    }
+    return response()->json("not found",404);
   }
   
 }

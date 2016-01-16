@@ -11,7 +11,11 @@ class Device extends Model {
 
 	public function values()
 	{
-		return $this->hasMany('Device', 'did','id');
+		return $this->hasMany('App\Value', 'did','id');
+	}
+	public function device()
+	{
+		return $this->belongsTo('App\User', 'id','uid');
 	}
 
 }

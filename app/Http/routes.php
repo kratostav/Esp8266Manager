@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-	return view('welcome');
+	//return view('welcome');
+    return redirect('/home');
 });
 
 /*
@@ -30,11 +31,20 @@ Route::group(['middleware' => ['web']], function () {
 	//
 });
 
-Route::resource('device', 'DeviceController');
-Route::resource('value', 'ValueController');
+//Route::resource('device', 'DeviceController');
+//Route::resource('value', 'ValueController');
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
     Route::get('/home', 'HomeController@index');
+        Route::get('/me', function () {
+            if(Auth::user()->admin) {
+                return response()->json(Auth::user());
+            }
+            return response('Not allowed',403);
+        });
+    Route::resource('device', 'DeviceController');
+    Route::resource('value', 'ValueController');
+
+
 });

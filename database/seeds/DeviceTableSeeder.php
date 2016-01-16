@@ -9,16 +9,14 @@ class DeviceTableSeeder extends Seeder {
 	{
 		//DB::table('devices')->delete();
 
-		Device::create(array(
-			'MAC' => 'FF:FF:FF:FF:FF:AA',
-		));
-
 		DB::table('devices')->insert([
 			'MAC' => 'FF:FF:FF:FF:FF:FF',
 			'Name' => 'Google Ultron',
+			'uid' => 1,
 		]);
 		DB::table('devices')->insert([
 			'MAC' => 'FF:FF:FF:FF:FF:AA',
+			'uid' => 1,
 		]);
 
 	}
