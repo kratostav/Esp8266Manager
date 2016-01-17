@@ -12,6 +12,7 @@
                     You are logged in!</br>
                     Your devices:</br></br>
                     Display table here
+                    {{$devices}}
             </div>
         </div>
     </div>

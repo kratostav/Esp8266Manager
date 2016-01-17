@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $devices = auth()->user()->devices()->with('values')->get(); //get All Devices with Values from Loggedin User
+        return view('home')->with(['devices'=>$devices]);
     }
 }

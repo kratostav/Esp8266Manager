@@ -26,14 +26,6 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-Route::group(['middleware' => ['web']], function () {
-	//
-});
-
-//Route::resource('device', 'DeviceController');
-//Route::resource('value', 'ValueController');
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/home', 'HomeController@index');
