@@ -23,7 +23,8 @@ class DeviceController extends Controller {
   {
     //$devices = Device::with('values')->get();
     $devices = auth()->user()->devices()->with('values')->get(); //get All Devices with Values from Loggedin User
-    return response()->json($devices,200);
+    //return response()->json($devices,200);
+    return view('devices')->with(['devices'=>$devices]);
   }
 
   /**
@@ -54,7 +55,11 @@ class DeviceController extends Controller {
    */
   public function show($id)
   {
-    $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
+    $device = auth()
+        ->user()
+        ->devices()
+        ->with('values')
+        ->find($id); //get Device with Values from Loggedin User
     if($device)
     {
       return response()->json($device,200);
@@ -70,7 +75,11 @@ class DeviceController extends Controller {
    */
   public function edit($id)
   {
-    $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
+    $device = auth()
+        ->user()
+        ->devices()
+        ->with('values')
+        ->find($id); //get Device with id with Values from Loggedin User
     if($device)
     {
       return response()->json($device,200); //TODO: return form!
