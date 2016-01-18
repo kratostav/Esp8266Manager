@@ -12,8 +12,7 @@ class AlterUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table)
-        {
+        Schema::table('users', function ($table) {
             $table->boolean('admin')->default(false);
         });
     }
@@ -25,8 +24,7 @@ class AlterUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table)
-        {
+        Schema::table('users', function ($table) {
             $table->dropColumn('admin');
         });
     }

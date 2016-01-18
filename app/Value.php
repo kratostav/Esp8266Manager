@@ -4,14 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Value extends Model {
+class Value extends Model
+{
 
-	protected $table = 'values';
-	public $timestamps = true;
+    public $timestamps = true;
+    protected $table = 'values';
 
-	public function device()
-	{
-		return $this->belongsTo('App\Device', 'id','did');
-	}
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function device()
+    {
+        return $this->belongsTo('App\Device', 'id', 'did');
+    }
 
 }

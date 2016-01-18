@@ -8,20 +8,20 @@
                     <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
-                        @foreach($devices as $d)
-                            <div class="row">
-                            <div class="col-lg-6 col-md-12 text-center">
 
-                                <h1><a href="/device/{!! $d->id !!}">{!! $d->Name !!}</a></h1>
-                                <div id="{!! $d->MAC !!}" style="height: 200px;"></div>
+                            <div class="row">
+
+
+                                <h1 class="text-center">{!! $device->Name !!}</h1>
+                                <div id="{!! $device->MAC !!}" style="height: 200px;"></div>
                             </div>
                             <script type="text/javascript">
                                 $(function () {
-                                    var data = {!! $d->values !!};
+                                    var data = {!! $device->values !!};
 
                                     new Morris.Line({
 
-                                        element: '{!! $d->MAC !!}',
+                                        element: '{!! $device->MAC !!}',
 
                                         data: data,
 
@@ -39,11 +39,17 @@
 
                                 });
                             </script>
-                        @endforeach
+                        <div>
+                            {{ Form::open(['route' => ['device.destroy', $device->id], 'method' => 'delete',"class" => "form-inline"]) }}
+                            {{ Form::submit('Delete',["class" => "btn btn-danger"]) }}
+                            <a href="{{ route('device.edit',$device->id) }}" class="btn btn-primary">Edit</a>
+                            {{ Form::close() }}
+                        </div>
+
 
 
                     </div>
-                            </div>
+
                 </div>
             </div>
         </div>

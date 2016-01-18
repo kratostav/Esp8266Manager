@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-	//return view('welcome');
+    //return view('welcome');
     return redirect('/home');
 });
 
@@ -27,16 +27,27 @@ Route::get('/', function () {
 |
 */
 Route::group(['middleware' => 'web'], function () {
+
     Route::auth();
     Route::get('/home', 'HomeController@index');
-        Route::get('/me', function () {
-            if(Auth::user()->admin) {
+    Route::get('/me', function () {
+            if (Auth::user()->admin) {
                 return response()->json(Auth::user());
             }
-            return response('Not allowed',403);
+            return response('Not allowed', 403);
         });
     Route::resource('device', 'DeviceController');
     Route::resource('value', 'ValueController');
 
 
+});
+Route::group(['middleware' => 'auth.basic'], function () {
+
+    Route::get('/value/{MAC}/{temp}/{humi}', 'ValueController@store');
+    Route::get('/mebasic', function () {
+        if (Auth::user()->admin) {
+            return response()->json(Auth::user());
+        }
+        return response('Not allowed', 403);
+    });
 });

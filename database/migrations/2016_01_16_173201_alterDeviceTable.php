@@ -12,11 +12,10 @@ class AlterDeviceTable extends Migration
      */
     public function up()
     {
-        Schema::table('devices', function($table)
-        {
+        Schema::table('devices', function ($table) {
             $table->integer('uid')->unsigned();
         });
-        Schema::table('devices', function(Blueprint $table) {
+        Schema::table('devices', function (Blueprint $table) {
             $table->foreign('uid')->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -30,7 +29,7 @@ class AlterDeviceTable extends Migration
      */
     public function down()
     {
-        Schema::table('devices', function(Blueprint $table) {
+        Schema::table('devices', function (Blueprint $table) {
             $table->dropForeign('devices_uid_foreign');
             $table->dropColumn('uid');
 
