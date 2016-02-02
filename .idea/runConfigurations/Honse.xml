@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Honse" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$/public" port="9999" router_script="$PROJECT_DIR$/server.php" use_router_script="true">
+    <method />
+  </configuration>
+</component>

@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 
 class ValueController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function store($MAC,$temp,$humi)
     {
         $device = Device::where('MAC',$MAC)->first();
@@ -18,7 +22,8 @@ class ValueController extends Controller
         {
             $device = new Device();
             $device->MAC = $MAC;
-            $device->Name = 'new Device';
+            $device->Name = 'TDOT Sensor';
+            $device->uid = auth()->user()->id;
             $device->save();
         }
         $value = new Value();

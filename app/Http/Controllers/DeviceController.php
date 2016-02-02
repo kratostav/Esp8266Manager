@@ -23,7 +23,10 @@ class DeviceController extends Controller
     public function index()
     {
         //$devices = Device::with('values')->get();
-        $devices = auth()->user()->devices()->with('values')->get(); //get All Devices with Values from Loggedin User
+        $devices = auth()->user()->devices()
+            //->with('values')
+            //->with(array('values' => function($q) { $q->orderby("id","desc")->take(10);}))
+        ->get(); //get All Devices with Values from Loggedin User
         //return response()->json($devices,200);
         return view('devices')->with(['devices' => $devices,'title'=>"All Devices"]);
     }
@@ -58,10 +61,12 @@ class DeviceController extends Controller
         $device = auth()
             ->user()
             ->devices()
-            ->with('values')
+            //->with('values')
+            ->with(array('values' => function($q) { $q->orderby("id","desc")->take(10);}))
             ->find($id); //get Device with Values from Loggedin User
         if ($device) {
-            return view('device')->with(['device' => $device,'title'=>"Detail View"]);
+            $values=$device->values()->take(20);
+            return view('device')->with(['device' => $device,'values' => $values,'title'=>"Detail View"]);
         }
         return response()->json("not found", 404);
     }
@@ -96,7 +101,8 @@ class DeviceController extends Controller
     {
         $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
         if ($device) {
-            return response()->json($device, 200); //TODO: do sth with device!
+            //return response()->json($device, 200); //TODO: do sth with device!
+            return redirect('/device/'.$id);
         }
         return response()->json("not found", 404);
     }
@@ -112,7 +118,8 @@ class DeviceController extends Controller
         $device = auth()->user()->devices()->with('values')->find($id); //get Device with Values from Loggedin User
         if ($device) {
             $device->delete(); //TODO: Transaction
-            return response()->json($device, 200);
+            //return response()->json($device, 200);
+            return redirect('/device');
         }
         return response()->json("not found", 404);
     }

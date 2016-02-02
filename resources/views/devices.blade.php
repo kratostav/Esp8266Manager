@@ -17,7 +17,7 @@
                             </div>
                             <script type="text/javascript">
                                 $(function () {
-                                    var data = {!! $d->values !!};
+                                    var data = {!! $d->values()->orderby("id","desc")->take(10)->get() !!};
 
                                     new Morris.Line({
 
