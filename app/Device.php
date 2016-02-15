@@ -14,6 +14,10 @@ class Device extends Model
     {
         return $this->hasMany('App\Value', 'did', 'id');
     }
+    public function valuesAcc()
+    {
+        return $this->hasMany('App\ValueAcc', 'did', 'id');
+    }
 
     public function user()
     {

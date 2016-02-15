@@ -62,11 +62,12 @@ class DeviceController extends Controller
             ->user()
             ->devices()
             //->with('values')
-            ->with(array('values' => function($q) { $q->orderby("id","desc")->take(10);}))
+            ->with(array('values' => function($q) { $q->orderby("id","desc")->take(24);}))
+            ->with(array('valuesAcc' => function($q) { $q->orderby("id","desc")->take(20);}))
             ->find($id); //get Device with Values from Loggedin User
         if ($device) {
-            $values=$device->values()->take(20);
-            return view('device')->with(['device' => $device,'values' => $values,'title'=>"Detail View"]);
+
+            return view('device')->with(['device' => $device,'title'=>"Detail View"]);
         }
         return response()->json("not found", 404);
     }

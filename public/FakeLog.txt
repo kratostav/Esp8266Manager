@@ -1,0 +1,12 @@
+ 
+{"id":29,"created_at":"2016-01-22 15:21:49","updated_at":"2016-01-22 15:21:49","MAC":"5c:cf:7f:0f:74:b6","Name":"TDOT Sensor","uid":"1"}
+{"temperature":1,"humidity":54,"did":29,"updated_at":"2016-02-15 13:23:13","created_at":"2016-02-15 13:23:13","id":3507}
+ 
+ 
+{"id":30,"created_at":"2016-02-02 11:11:44","updated_at":"-0001-11-30 00:00:00","MAC":"FF:FF:FF:FF:FF:FF","Name":"Google Ultron","uid":"1"}
+{"temperature":82,"humidity":56,"did":30,"updated_at":"2016-02-15 13:23:13","created_at":"2016-02-15 13:23:13","id":3508}
+ 
+ 
+{"id":31,"created_at":"2016-02-02 11:11:44","updated_at":"-0001-11-30 00:00:00","MAC":"FF:FF:FF:FF:FF:AA","Name":null,"uid":"1"}
+{"temperature":16,"humidity":86,"did":31,"updated_at":"2016-02-15 13:23:13","created_at":"2016-02-15 13:23:13","id":3509}
+ 

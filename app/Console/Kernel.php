@@ -16,6 +16,9 @@ class Kernel extends ConsoleKernel
         Commands\Inspire::class,
         Commands\CleanData::class,
         Commands\AccumulateData::class,
+        Commands\AccuCleanSched::class,
+        Commands\FakeSensor::class,
+        Commands\FakeSensorLastXDays::class,
     ];
 
     /**
@@ -26,7 +29,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-            ->hourly();
+        $schedule->command('data:scheduled')
+            ->dailyAt('23:50')->sendOutputTo(public_path().'/AccuLog.txt');
+
     }
 }

@@ -2,26 +2,25 @@
 
 namespace App\Console\Commands;
 
+use App\Device;
 use App\Value;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
-class CleanData extends Command
+class FakeSensor extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'data:clean';
+    protected $signature = 'data:fake';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Deletes all values exept values that are not older than 2 days';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -40,20 +39,18 @@ class CleanData extends Command
      */
     public function handle()
     {
-        //DB::enableQueryLog();
-
-        $this->info("Database Clean started");
-
-        $date=Carbon::now()->subDay(7);
-        $this->info($date);
-
-        $result = Value::where('created_at','<=',$date)->get();
-
-        foreach($result as $r)
+        $devices = Device::get();
+        foreach($devices as $d)
         {
-            $this->info($r);
+            $value = new Value();
+            $value->temperature = mt_rand(0,100);
+            $value->humidity = mt_rand(0,100);
+            $value->did = $d->id;
+            $value->save();
+            $this->info(" ");
+            $this->info($d);
+            $this->info($value);
+            $this->info(" ");
         }
-
-        $this->info("Database Cleaned");
     }
 }
