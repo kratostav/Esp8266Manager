@@ -16,7 +16,5 @@ class DatabaseSeeder extends Seeder
         $this->call('DeviceTableSeeder');
         $this->command->info('Device table seeded!');
 
-        $this->call('ValueTableSeeder');
-        $this->command->info('Value table seeded!');
     }
 }
